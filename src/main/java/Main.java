@@ -31,7 +31,7 @@ public class Main {
         try {
             try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
                 for (int r : RPS) {
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < 60; i++) {
                         long delay = 1000 / r;
                         for (int j = 0; j < r; j++) {
                             Thread.sleep(delay);
