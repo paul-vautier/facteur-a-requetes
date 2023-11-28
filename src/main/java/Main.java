@@ -49,7 +49,7 @@ public class Main {
     public void sendRequest() {
         HttpRequest req = HttpRequest.newBuilder().GET().uri(URI.create(this.url)).build();
         try {
-            client.send(req, HttpResponse.BodyHandlers.ofString()).body();
+            client.send(req, HttpResponse.BodyHandlers.ofString());
         } catch (IOException e) {
             System.out.println("Received an error :" + e);
         } catch (InterruptedException e) {
