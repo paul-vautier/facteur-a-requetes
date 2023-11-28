@@ -3,6 +3,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +23,7 @@ public class Main {
         if (args.length < 1) {
             throw new IllegalArgumentException("Please provide a url as a program argument");
         }
-        try (HttpClient client = HttpClient.newBuilder().build()) {
+        try (HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build()) {
             new Main(client, args[0]).run();
         }
     }
@@ -50,7 +51,7 @@ public class Main {
         try {
             System.out.println(client.send(req, HttpResponse.BodyHandlers.ofString()).body());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Received an error :" + e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
